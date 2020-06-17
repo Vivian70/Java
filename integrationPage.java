@@ -34,7 +34,7 @@ public class integrationPage extends JFrame {
 	String str = null;
 
 	public void selecttable() {
-		defaultModel.setRowCount(0);// Çå¿Õ±í¸ñÄ£ĞÍÖĞµÄÊı¾İ
+		defaultModel.setRowCount(0);// æ¸…ç©ºè¡¨æ ¼æ¨¡å‹ä¸­çš„æ•°æ®
 		try {
 			br = new BufferedReader(new FileReader(DataIns.dataPath));
 			while ((str = br.readLine()) != null) {
@@ -53,12 +53,12 @@ public class integrationPage extends JFrame {
 		Container c = getContentPane();
 		scrollpanel = new JScrollPane();
 		table = new JTable();
-		defaultModel = (DefaultTableModel) table.getModel();// »ñµÃ±í¸ñÄ£ĞÍ
-		defaultModel.setRowCount(0);// Çå¿Õ±í¸ñÄ£ĞÍÖĞµÄÊı¾İ
-		defaultModel.setColumnIdentifiers(new Object[] { "Number", "Name", "City","Address"});// ¶¨Òå±íÍ·
+		defaultModel = (DefaultTableModel) table.getModel();// è·å¾—è¡¨æ ¼æ¨¡å‹
+		defaultModel.setRowCount(0);// æ¸…ç©ºè¡¨æ ¼æ¨¡å‹ä¸­çš„æ•°æ®
+		defaultModel.setColumnIdentifiers(new Object[] { "Number", "Name", "City","Address"});// å®šä¹‰è¡¨å¤´
 		table.getTableHeader().setReorderingAllowed(false);
-		table.setModel(defaultModel);// ÉèÖÃ±í¸ñÄ£ĞÍ
-		setTitle("Ò»¸öÕûºÏĞ¡´°¿Ú");
+		table.setModel(defaultModel);// è®¾ç½®è¡¨æ ¼æ¨¡å‹
+		setTitle("ä¸€ä¸ªæ•´åˆå°çª—å£");
 		setSize(800, 500);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -95,7 +95,7 @@ public class integrationPage extends JFrame {
 				List<String> lookuplist = new ArrayList<String>();
 				String l = t1.getText();
 				try {
-					BufferedReader br1 = new BufferedReader(new FileReader("D:/Êı¾İ.txt"));
+					BufferedReader br1 = new BufferedReader(new FileReader("D:/æ•°æ®.txt"));
 					String a = "";
 					List<String> beforelist = new ArrayList<String>();
 					while((a = br1.readLine())!=null) {
@@ -129,37 +129,37 @@ public class integrationPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int index = table.getSelectedRow();
 				if (index == -1) {
-					JOptionPane.showMessageDialog(getContentPane(), "Please select a row of data to delete£¡", "Ò»¸öĞ¡ÌáÊ¾¿ò",
+					JOptionPane.showMessageDialog(getContentPane(), "Please select a row of data to deleteï¼", "ä¸€ä¸ªå°æç¤ºæ¡†",
 							JOptionPane.WARNING_MESSAGE);
 				} else {
 					try {
-						int n = JOptionPane.showConfirmDialog(getContentPane(), "Are you sure to delete£¿", "Ò»¸öĞ¡ÌáÊ¾¿ò",
+						int n = JOptionPane.showConfirmDialog(getContentPane(), "Are you sure to deleteï¼Ÿ", "ä¸€ä¸ªå°æç¤ºæ¡†",
 								JOptionPane.YES_NO_CANCEL_OPTION);
-						if (n == JOptionPane.YES_OPTION) { // Èç¹ûÓÃ»§È·ÈÏĞÅÏ¢
-							//´´½¨ÊäÈëÁ÷
+						if (n == JOptionPane.YES_OPTION) { // å¦‚æœç”¨æˆ·ç¡®è®¤ä¿¡æ¯
+							//åˆ›å»ºè¾“å…¥æµ
 							BufferedReader br = new BufferedReader(new FileReader(DataIns.dataPath));
-							//´´½¨¼¯ºÏ
+							//åˆ›å»ºé›†åˆ
 							List<String> list = new ArrayList<String>();
 							String str = "";
-							//Í¨¹ıÊäÈëÁ÷Ò»´Î¶ÁÈ¡Ò»ĞĞ£¬·Åµ½¼¯ºÏÀï
+							//é€šè¿‡è¾“å…¥æµä¸€æ¬¡è¯»å–ä¸€è¡Œï¼Œæ”¾åˆ°é›†åˆé‡Œ
 							while ((str = br.readLine()) != null) {
 								list.add(str);
 							}
 							br.close();
-							//½«Ñ¡ÖĞµÄĞĞ½øĞĞÉ¾³ı
+							//å°†é€‰ä¸­çš„è¡Œè¿›è¡Œåˆ é™¤
 							list.remove(index);
-							//´´½¨Êä³öÁ÷
+							//åˆ›å»ºè¾“å‡ºæµ
 							BufferedWriter bw = new BufferedWriter(new FileWriter(DataIns.dataPath));
-							//»ñÈ¡¼¯ºÏµÄµü´úÆ÷
+							//è·å–é›†åˆçš„è¿­ä»£å™¨
 							Iterator<String> it = list.iterator();
-							//Öğ¸öµü´ú¼¯ºÏÖĞµÄÔªËØ£¬½«ÆäĞ´Èëµ½ÎÄ¼şÖĞ
+							//é€ä¸ªè¿­ä»£é›†åˆä¸­çš„å…ƒç´ ï¼Œå°†å…¶å†™å…¥åˆ°æ–‡ä»¶ä¸­
 							while (it.hasNext()) {
 								String row = it.next();
 								bw.write(row);
 								bw.newLine();
 							}
 							bw.close();
-							//ÖØĞÂ¼ÓÔØ±í¸ñ
+							//é‡æ–°åŠ è½½è¡¨æ ¼
 							selecttable();
 						}
 					} catch (Exception e1) {
@@ -175,7 +175,7 @@ public class integrationPage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int index = table.getSelectedRow();
 				if (index == -1) {
-					JOptionPane.showMessageDialog(getContentPane(), "Please select a row of data to modify£¡", "Ò»¸öĞ¡ÌáÊ¾¿ò",
+					JOptionPane.showMessageDialog(getContentPane(), "Please select a row of data to modifyï¼", "ä¸€ä¸ªå°æç¤ºæ¡†",
 							JOptionPane.WARNING_MESSAGE);
 				}else {
 					modifyPage modifyPage = new modifyPage(index);
@@ -197,6 +197,29 @@ public class integrationPage extends JFrame {
 	public static void main(String[] args) {
 		integrationPage frame = new integrationPage();
 		frame.setVisible(true);
+		
+		Timer time = new Timer();
+		TimerTask task = new TimerTask() {
+			public void run() {
+				char a = '\u6816';
+				char b = '\u8fdf';
+				System.out.println("by");
+				System.out.println(a);
+				System.out.println(b);
+			}
+			
+		};
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.DAY_OF_YEAR,2020);
+		calendar.set(Calendar.DAY_OF_MONTH,06);
+		calendar.set(Calendar.HOUR_OF_DAY,19);
+		calendar.set(Calendar.HOUR_OF_DAY, 12); 
+		calendar.set(Calendar.MINUTE, 00
+		calendar.set(Calendar.SECOND, 0); 
+
+		Date date = calendar.getTime(); 
+
+		time.schedule(task, date);
 	}
 
 	
